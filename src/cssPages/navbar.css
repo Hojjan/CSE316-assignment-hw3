@@ -1,0 +1,153 @@
+nav{
+    background-color: lavender;
+    margin-top: 10% 0
+  }
+  
+  nav ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+  }
+  
+  nav li{
+    height: 80px;
+    font-size: 17px;
+    white-space: nowrap;
+  }
+  
+  nav a{
+    height: 100%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: black;
+  }
+  
+  nav a:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .center-menu{
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+  }
+  
+  .home-button{ 
+    margin-left: 6%;
+    transition: margin-left 0.3s ease;
+  }
+  .profile-button{
+    margin-right: 10%;
+  }
+  
+  /*------------------------------------------------------------------*/
+  /*------------------------------------------------------------------*/
+  
+  .hideOnMobile{
+    display: block;
+  }
+  
+  .menu-button{
+    display: none;
+  }
+  
+  @media(max-width: 600px){
+    .hideOnMobile{ 
+        display: none;
+    }
+    .menu-button{
+        display: flex;   /*프로필 버튼이 사라지고 메뉴 버튼이 그 자리를 대체 하도록*/
+        margin-right: 40px;
+    }
+    .contents{
+        margin-left: 5%;
+    }
+    .home-button{ 
+        margin-left: 3%;
+    }
+  }
+  
+  /*------------------------------------------------------------------*/
+  /*------------------------------------------------------------------*/
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;  
+    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2);
+    width: 150px;
+    height: 100px;
+    padding: 0;
+  
+  }
+  
+  .dropdown-content a { 
+    display: flex;
+    color: black;
+    height: 50%;
+    width: 100%;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .dropdown-content a:hover {
+    margin: 0 10%;
+    width: 80%;
+    background-color: #cfcfcf;
+  }
+  
+  
+  nav li:hover .dropdown-content {
+    display: block;
+  }
+  
+  
+  /*------------------------------------------------------------------*/
+  /*------------------------------------------------------------------*/
+  
+  .sidebar{
+    position: static;
+    top: 0;
+    right: 0;
+    height: 25vh;
+    width: 90w;
+    z-index: 999;
+    background-color: lavender;
+    display: none;
+    flex-direction: column;
+    padding: 0;
+  }
+  
+  .sidebar li{
+    width: 100%;
+  
+  }
+  
+  .sidebar a{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .sidebar a:hover {
+    margin: 0 10%;
+    width: 80%;
+    background-color: #cfcfcf;
+  }
+  
+  .sidebar .dropdown-content {
+    margin-left: 10%;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;  
+    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2);
+    width: 150px;
+    height: 100px;
+    padding: 0;
+  
+  }

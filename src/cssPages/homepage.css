@@ -1,0 +1,79 @@
+body{
+  background-color: lavender;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.contents{
+  margin-left: 10%;
+  font-size: 100%;
+  transition: margin-left 0.3s ease;
+}
+
+/*------------------------------------------------------------------*/
+/*------------------------------------------------------------------*/
+
+
+
+/*------------------------------------------------------------------*/
+/*------------------------------------------------------------------*/
+
+p {
+  margin-top: 4px;
+  margin-bottom: 25px; 
+  margin-left: 7%;
+}
+
+#subtitle{
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.contents li{
+  list-style-type: none;
+  position: relative;
+}
+
+.circleList {
+    position: relative;
+    padding-left: 20px;
+    margin-left: 4%;
+}
+
+.circleList::before {
+    content: ''; /*일단은 뭔가를 넣을 공간을 만들어줘야 됨*/
+    position: absolute;
+    left: 0;
+    top: 50%; /* 점을 텍스트 중간에 맞춤 */
+    transform: translateY(-50%); /* 수직 중앙 정렬 */
+    width: 3px; /* 점의 너비 고정 */
+    height: 3px; /* 점의 높이 고정 */
+    border: 1px solid black; /* 비어있는 원형 점을 만들기 위해서는 border를 그려줘야 함 */
+    border-radius: 50%; /* 원 모양 만들기 */
+} 
+
+.discList {
+  position: relative;
+  padding-left: 20px; /* 텍스트와 점 사이의 간격 */
+}
+
+.discList::before {
+  content: '';  
+  position: absolute;
+  left: 0;
+  top: 50%; 
+  transform: translateY(-50%); 
+  width: 4px; 
+  height: 4px; 
+  border-radius: 50%; 
+  background-color: black;
+} 
+
+#addIndent{
+  margin-left: 8.5%;
+}
+
+#noIndent p{
+  margin-left: 5.5%;
+}
