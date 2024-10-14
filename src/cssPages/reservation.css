@@ -1,0 +1,172 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 0;
+    background-color: lavender;
+}
+
+.menu-container {
+    width: 170px;
+    margin-top: 30px;
+    margin-left: 7%;
+    transition: margin-left 0.3s ease;
+}
+
+select {
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white; 
+    background-size: 10px;
+    cursor: pointer;
+}
+
+.menu-content {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+
+.facility-image {
+    width: 25%; 
+    min-width: 250px;
+    height: 15%;  
+    min-height: 150px;
+    border-radius: 20px;  
+    margin-left: 7%;
+    margin-top: 30px;
+    transition: margin-left 0.3s ease;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.imgLst-item{
+    display: flex;
+    flex-direction: row;
+}
+
+.description{
+    padding-top: 30px;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.description h4{    
+    font-size: clamp(20px, 2vw, 40px);
+    
+    margin: 10px 0;
+}
+
+.description p{
+    font-size: clamp(15px, 1.5vw, 25px);
+    margin: 1px;
+}
+
+.icon-text-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;  
+    width: auto; 
+}
+
+
+.icon-text-row img {
+    width: 20px;  
+    height: 20px;  
+    margin-right: 8px; 
+}
+
+
+
+.context{
+    margin-top: 45px;
+    font-weight: bold;
+    margin: 35px 7%;
+    transition: margin-left 0.3s ease;
+}
+
+
+
+.date-picker {
+    padding: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 125px;
+    box-sizing: border-box;
+}
+
+
+
+.people-container {
+    margin: 20px 0;
+    display: flex;
+}
+
+.people-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.people-container input {
+    padding: 0;
+    font-size: 16px;
+    width: 150px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin-left: 5px;
+}
+
+.button-container {
+    margin: 20px 0;  
+}
+
+.button-container label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.radio-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-options label {
+    margin-bottom: 5px;  /* 라디오 버튼 간격 */
+}
+
+.text-container {
+    margin: 20px 0;
+}
+
+.text-container label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.text-container text {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    resize: vertical; /* 상하 크기 조절 가능 */
+}
+
+
+button{
+    border-radius: 5px;
+    width: 60px;
+    height: 30px;
+}
+
+
+
+

@@ -15,15 +15,15 @@ function Navbar(){
           </li>
 
         <div className="center-menu">
-          <li>
-            <Link to="/facilityList">Facility List</Link>
+          <li className="hideOnMobile">
+            <Link to="/facilityList"><p>Facility List</p></Link>
           </li>
           <li className="hideOnMobile">
-              <Link to="/reservation">Reservation</Link>
+              <Link to="/reservation"><p>Reservation</p></Link>
           </li>
           <li className="hideOnMobile">
               <a href="#">
-                User
+              <p>User</p>
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
                   <path d="M480-360 280-560h400L480-360Z" />
                 </svg>
@@ -55,14 +55,12 @@ function Navbar(){
             <Link to="/facilityList">Facility List</Link>
           </li>
           <li>
-          <Link to="/reservation">Facility Reservation</Link>
+            <Link to="/reservation">Facility Reservation</Link>
           </li>
           <li>
             <a href="#">
               My Page
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                <path d="M480-360 280-560h400L480-360Z" />
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M480-360 280-560h400L480-360Z" /></svg>
             </a>
             <ul className="dropdown-content">
               <Link to="/userInfo">My Information</Link>
@@ -75,12 +73,15 @@ function Navbar(){
 }
 
 function showSideBar(){
-  const sidebar = document.querySelector('.sidebar')
+  const sidebar = document.querySelector('.sidebar');
+  const bodyContent = document.querySelector('body');
 
   if (sidebar.style.display === "flex") {
       sidebar.style.display = "none";
+      bodyContent.style.marginTop = "100px";
     } else {
       sidebar.style.display = "flex";
+      bodyContent.style.marginTop = "250px";
     }
 }
 

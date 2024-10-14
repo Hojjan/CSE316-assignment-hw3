@@ -2,27 +2,20 @@ body{
   background-color: lavender;
   margin: 0;
   font-family: Arial, sans-serif;
+  margin-top: 90px;
 }
 
 .contents{
   margin-left: 10%;
   font-size: 100%;
   transition: margin-left 0.3s ease;
+  
 }
 
 /*------------------------------------------------------------------*/
 /*------------------------------------------------------------------*/
 
 
-
-/*------------------------------------------------------------------*/
-/*------------------------------------------------------------------*/
-
-p {
-  margin-top: 4px;
-  margin-bottom: 25px; 
-  margin-left: 7%;
-}
 
 #subtitle{
   font-weight: bold;
@@ -70,10 +63,16 @@ p {
   background-color: black;
 } 
 
-#addIndent{
-  margin-left: 8.5%;
+.contexts p {
+  margin-left: 7%;
+  margin-bottom: 1.5%;
+}
+
+#moreIndent{
+  margin-left: 9.5%;
 }
 
 #noIndent p{
   margin-left: 5.5%;
+  margin-bottom: 1.5%;
 }
