@@ -2,14 +2,6 @@ import React, { useState, useEffect } from "react";
 import '../cssPages/reservation.css'
 import axios from 'axios';
 
-const facilities = [
-    { src: '/gym.jpg', name: 'Gym', alt: 'gym', desc: 'A place used for physical activity', days: 'Mon, Tue, Wed, Thu, Fri, Sat, Sun', par: '1 - 5', loc: 'A101', suny: false},
-    { src: '/auditorium.jpg', name: 'Auditorium', alt: 'auditorium', desc: 'A place for large events', days: 'Mon, Tue, Wed, Thu', par: '10 - 40', loc: 'A234', suny: false},
-    { src: '/pool.jpg', name: 'Swimming Pool', alt: 'pool', desc: 'A place for physical activity', days: 'Sat, Sun', par: '1 - 8', loc: 'B403', suny: false },
-    { src: '/seminar.jpg', name: 'Seminar Room', alt: 'seminar', desc: 'A place for large meetings', days: 'Mon, Wed, Fri', par: '10 - 30', loc: 'B253', suny: false },
-    { src: '/conference.jpg', name: 'Conference Room', alt: 'conference', desc: 'A place for small but important meetings', days: 'Mon, Tue, Wed, Thu, Fri', par: '1 - 10', loc: 'C1033', suny: true },
-    { src: '/library.jpg', name: 'Library', alt: 'library', desc: 'A quiet place', days: 'Mon, Tue, Wed, Thu, Fri, Sat, Sun', par: '1 - 20', loc: 'A1011', suny: true }
-];
 
 const calculateDayOfWeek = (day, month, year) => {
   if (month === 1) { //for January, set month to 13 and subtract 1 from year
@@ -42,25 +34,20 @@ function Reservation(){
   useEffect(() => {
     // 백엔드 API 호출
     axios.get('http://localhost:3001/api/facilities') // API 엔드포인트를 사용하여 데이터를 가져옴
-      .then((response) => {
-        console.log('API 데이터:', response.data);
-        setFacilities(response.data); // 응답 데이터를 images 상태로 설정
-      })
-      .catch((error) => {
-        console.error('Error fetching facility data:', error);
-      });
+      .then((response) => {setFacilities(response.data); })// 응답 데이터를 images 상태로 설정
+      .catch((error) => {console.error('Error fetching facility data:', error);});
   }, []);
 
     const handleFacilityChange = (event) => {
       setSelectedFacility(event.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
       e.preventDefault();
 
-      //이 부분 DB에서 불러오는걸로 바꾸기
-      const reservsList = localStorage.getItem('reservationsList')
-      const strdReserv = JSON.parse(reservsList) || [];
+      //이 부분 DB에서 불러오는걸로 바꾸기 / 이미 예약한 정보가 있다면 제한을 걸기 위한 변수 선언
+      const response = await axios.get('http://localhost:3001/api/reservation');
+      const strdReserv = response.data;
 
 
       const slctedFacData = facilities.find(facility => facility.facility_name === selectedFacility);
@@ -102,7 +89,7 @@ function Reservation(){
       const dayOfWeek = calculateDayOfWeek(day, month, year);
       
       // Checking available day
-      if (!slctedFacData.availiable_days.includes(dayOfWeek)) {
+      if (!slctedFacData.available_days.includes(dayOfWeek)) {
           alert('Day error: Invalid day of the week');
           return;
       }
@@ -113,30 +100,41 @@ function Reservation(){
         return;
       }
 
+
+
+
       // Checking if there is a reservation for same facility
-      if (strdReserv.find(res => res.facility === selectedFacility)) {
+      if (strdReserv.find(res => res.reservation_name === selectedFacility)) {
           alert('You already have a reservation for this facility.');
           return;
       }
 
       // Checking if there is another reservation for same date
-      if (strdReserv.find(res => res.date === date)) {
+      if (strdReserv.find(res => res.reservation_date === date)) {
           alert('You already have a reservation for another facility on same date.');
           return;
       }
 
+
+
+
+
+
       const newReservation = { facility: selectedFacility, date, numPeople, suny, purpose, src, location};
 
 
-      // Make update list by adding new information
-      const updatedReservations = [...strdReserv, newReservation];
-
-      localStorage.setItem('reservationsList', JSON.stringify(updatedReservations));
-      alert('Reservation successful!');
+      // 여기가 찐으로 데이터 입력하는 부분
+      axios.post('http://localhost:3001/api/reservation', newReservation)
+      .then((response) => {
+        alert(response.data.message); // 'Reservation successful!' 메시지 표시
+      })
+      .catch((error) => {
+        alert('Failed to save reservation. Please try again.');
+      });
     };
   
     // selecting proper image for a facility
-    const slctedFacData = facilities.find(facility => facility.name === selectedFacility);
+    const slctedFacData = facilities.find(facility => facility.facility_name === selectedFacility);
 
     return(
     
@@ -145,8 +143,8 @@ function Reservation(){
         <div className="menu-container">
           <select id="facility-select" onChange={handleFacilityChange}>
             {facilities.map((facility) => (
-              <option key={facility.name} value={facility.name}>
-                {facility.name}
+              <option key={facility.facility_name} value={facility.facility_name}>
+                {facility.facility_name}
               </option>
             ))}
             </select>
@@ -155,14 +153,14 @@ function Reservation(){
         <div>
           {slctedFacData && (
             <div className="imageList">
-                <img src={slctedFacData.src} alt={slctedFacData.alt}  />
+                <img src={slctedFacData.image_src} alt={slctedFacData.facility_name}  />
                 <div className="facility-details">
-                    <h2>{slctedFacData.name}</h2>
-                    <p>{slctedFacData.desc}</p>
-                    <p><img src={'/calendar.png'} alt={'calendar icon'} />{slctedFacData.days}</p>
-                    <p><img src={'/location.png'} alt={'location icon'} />{slctedFacData.loc}</p>
-                    <p><img src={'/people.png'} alt={'people icon'} />{slctedFacData.par}</p>
-                    <p><img src={'/exclamation.png'} alt={'availiablity icon'} />{slctedFacData.suny ? 'Only available for SUNY' : 'Available to All'}</p>
+                    <h2>{slctedFacData.facility_name}</h2>
+                    <p>{slctedFacData.facility_desc}</p>
+                    <p><img src={'/calendar.png'} alt={'calendar icon'} />{slctedFacData.available_days}</p>
+                    <p><img src={'/location.png'} alt={'location icon'} />{slctedFacData.location}</p>
+                    <p><img src={'/people.png'} alt={'people icon'} />{slctedFacData.min_capacity}-{slctedFacData.max_capacity}</p>
+                    <p><img src={'/exclamation.png'} alt={'availiablity icon'} />{slctedFacData.suny_flag ? 'Only available for SUNY' : 'Available to All'}</p>
 
                 </div>
             </div>
@@ -206,6 +204,8 @@ function Reservation(){
 
     
 }
+
+
 
 
 
