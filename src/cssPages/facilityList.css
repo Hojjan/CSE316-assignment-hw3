@@ -1,25 +1,25 @@
-body{
-  margin-bottom: 20px;
-  
-}
-
-
 .imageContainer {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2열 배치 */
-    gap: 20px; 
-    margin-top: 100px;  
+    grid-template-columns: repeat(2, 1fr); /* 2 column arrangement */
+    gap: 20px;  
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
-    max-width: 82%; /*max-width를 제한하면 남은 공간을 사진이 차지하려고 하기 때문에 가운데로 모임*/
-  }
+    margin-bottom: 20px;
+    max-width: 82%; /*By limit max-width, make photos gather in the middle by letting them to fill leftover parts*/
+}
+
+.imageContainer h2{
+  margin: 5px 7px 5px;
+  font-size: 2vw;
+}
+
   
 .image-box {
-  background-color: white; /* 흰색 배경 */
-  padding: 10px; /* 이미지와 박스 사이의 패딩 */
-  border: 1px solid #ddd; /* 옅은 테두리 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
+  background-color: white; 
+  padding: 10px; 
+  border: 1px solid #ddd; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,25 +27,22 @@ body{
 }
 
 .image-box img {
-  max-width: 100%; /* 박스 안에서 이미지가 넘치지 않도록 */
-  height: auto; /* 이미지 비율 유지 */
+  max-width: 100%; 
+  height: auto;
   border-radius: 20px;
   padding: 2%;
 }
 
-h2{
-  margin: 5px 7px 5px;
-  font-size: 2vw;
-}
 
 .image-box p{
   margin: 5px 8px 5px; 
   font-size: 1.25vw;
 }
 
-.image-box p img{ /*여기서 .image-box가 필요한 이유는, 위에 .image-box img 라는 선택자가 먼저 지정이 되었고, 클래스가 일반 선택자보다 우선순위가 높기 때문에 얘네는 무시가 되는 것이다*/
+.image-box p img{ /* The reason why .image-box is necessary here is that the selector .image-box img was defined first, 
+                      and since class selectors have higher priority than general selectors, the general selectors are being ignored. */
   padding: 0 1px 0 0;
-  transform: translateY(20%); /* 수직 중앙 정렬 */
+  transform: translateY(20%); /* middle arrange Y axis */
   width: 20px;
   height: 20px;
 }
@@ -68,7 +65,7 @@ h2{
     border-radius: 20px;
   }
 
-  h2{
+  .imageContainer h2{
     margin: 5px 7px 5px;
     font-size: 20px;
   }
@@ -99,9 +96,9 @@ h2{
       border-radius: 20px;
   }
 
-  h2{
+  .imageContainer h2{
     margin: 5px 1% 5px;
-    font-size: 20px;
+    font-size: 25px;
   }
 
   .image-box p{

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 function Navbar(){
   return(
     <nav>
+      {/* Changed all <a href=> to <Link> */}
         <ul>
           <li className="home-button">
             <Link to="/homepage">
@@ -14,43 +15,46 @@ function Navbar(){
             </Link>
           </li>
 
-        <div className="center-menu">
-          <li className="hideOnMobile">
-            <Link to="/facilityList"><p>Facility List</p></Link>
-          </li>
-          <li className="hideOnMobile">
-              <Link to="/reservation"><p>Reservation</p></Link>
-          </li>
-          <li className="hideOnMobile">
-              <a href="#">
-              <p>User</p>
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                  <path d="M480-360 280-560h400L480-360Z" />
-                </svg>
-              </a>
-              <ul className="dropdown-content">
-                <Link to="/userInfo">My Information</Link>
-                <Link to="/myReservation">My Reservation</Link>
-              </ul>
-          </li>
+          {/* codes for Facility List, Reservation, User menus on nav bar */}
+          <div className="center-menu">
+            <li className="hideOnMobile">
+              <Link to="/facilityList"><p>Facility List</p></Link>
+            </li>
+            <li className="hideOnMobile">
+                <Link to="/reservation"><p>Reservation</p></Link>
+            </li>
+            <li className="hideOnMobile">
+                <Link to="#" className="user">
+                  <p>User</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                      <path d="M480-360 280-560h400L480-360Z" />
+                    </svg>
+                </Link>
+                <ul className="dropdown-content">
+                  <Link to="/userInfo">My Information</Link>
+                  <Link to="/reservationHistory">Reservation History</Link>
+                </ul>
+            </li>
           </div>
 
-          <li className="menu-button" onClick={showSideBar}>
-            <a href="#">
+          {/* Hamburger menu button appears */}
+          <li className="menu-button" onClick={showHamburger}>
+            <Link to = "#">
               <svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26" fill="#5f6368">
                 <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
               </svg>
-            </a>
+            </Link>
           </li>
 
           <li className="profile-button hideOnMobile">
-            <a href="#">
+            <Link to = "#">
               <img src="/user.png" alt="profile" width="50" />
-            </a>
+            </Link>
           </li> 
         </ul>
 
-        <ul className="sidebar">
+        {/* hamburger menu details */}
+        <ul className="hamburger">
           <li>
             <Link to="/facilityList">Facility List</Link>
           </li>
@@ -58,29 +62,30 @@ function Navbar(){
             <Link to="/reservation">Facility Reservation</Link>
           </li>
           <li>
-            <a href="#">
-              My Page
+            <Link to="#">
+              User
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M480-360 280-560h400L480-360Z" /></svg>
-            </a>
+            </Link>
             <ul className="dropdown-content">
               <Link to="/userInfo">My Information</Link>
-              <Link to="/myReservation">My Reservation</Link>
+              <Link to="/reservationHistory">Reservation History</Link>
             </ul>
           </li>
         </ul>
-      </nav>
+    </nav>
   );
 }
 
-function showSideBar(){
-  const sidebar = document.querySelector('.sidebar');
+function showHamburger(){
+  const hamburger = document.querySelector('.hamburger');
   const bodyContent = document.querySelector('body');
-
-  if (sidebar.style.display === "flex") {
-      sidebar.style.display = "none";
+  
+  /* Pushing every contents down when Hamburger menu expanded */
+  if (hamburger.style.display === "flex") {
+      hamburger.style.display = "none";
       bodyContent.style.marginTop = "100px";
     } else {
-      sidebar.style.display = "flex";
+      hamburger.style.display = "flex";
       bodyContent.style.marginTop = "250px";
     }
 }
