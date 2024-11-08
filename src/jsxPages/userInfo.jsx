@@ -6,6 +6,7 @@ function Userinfo(){
     const [popTitle, setPopTitle] = useState(""); /* For different contents of Pop Ups */
     const [popContent, setPopContent] = useState(null);
     const overlayRef = useRef(null);
+    const [activeButton, setActiveButton] = useState(null);
 
     useEffect(() => {
         if (overlayRef.current) {
@@ -16,6 +17,7 @@ function Userinfo(){
     /* Change name Pop Up */
     const namePopup = () => {
         if (pop) return;
+        setActiveButton("name");
         setPopTitle("Change your name");
         setPopContent(
             <div>
@@ -29,6 +31,7 @@ function Userinfo(){
     /* Change Password Pop Up */
     const passwordPopup = () => {
         if (pop) return;
+        setActiveButton("password");
         setPopTitle("Change your password");
         setPopContent(
             <div>
@@ -42,6 +45,7 @@ function Userinfo(){
     /* Change Image Pop Up */
     const ImagePopup = () => {
         if (pop) return;
+        setActiveButton("image");
         setPopTitle("Change your image");
         setPopContent(
             <div>
@@ -55,8 +59,14 @@ function Userinfo(){
     /* Close Pop Up */
     const closePopup = () => {
         setPop(false);
+        setActiveButton(null);
     };
 
+
+    const buttonStyle = (buttonName) => ({
+        backgroundColor: activeButton === buttonName ? "black" : "white",
+        color: activeButton === buttonName ? "white" : "black"
+    });
 
     return(
         <div className="wholeUserInfo">
@@ -64,22 +74,22 @@ function Userinfo(){
                 <h1>User Information</h1>
             </div>
             <div class="profileImage">
-                <img src="./user.png" alt="profile" width="150" />
+                <img src="./user.png" alt="profile" width="150" />  
             </div>
             <div>
-                <button id="change-image" onClick={ImagePopup}>Change Image</button>
+                <button id="change-image" onClick={ImagePopup} style={buttonStyle("image")}>Change Image</button>
             </div>
             <div className="change">
                 <div>
                     <p>Email: hochan.jun@stonybrook.edu</p>
                         <div>
                             <p>Password:*****</p>
-                            <button id="change-password" onClick={passwordPopup}>Change Password</button>
+                            <button id="change-password" onClick={passwordPopup} style={buttonStyle("password")}>Change Password</button>
                         </div>
                 </div>
                 <div>
                     <p>Name: Hochan Jun</p>
-                    <button id="change-name" onClick={namePopup}>Change Name</button>
+                    <button id="change-name" onClick={namePopup} style={buttonStyle("name")}>Change Name</button>
                 </div>
             </div>
 

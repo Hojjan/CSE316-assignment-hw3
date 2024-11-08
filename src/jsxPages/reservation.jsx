@@ -32,9 +32,8 @@ function Reservation(){
     const [facilities, setFacilities] = useState([]);
 
   useEffect(() => {
-    // 백엔드 API 호출
-    axios.get('http://localhost:3001/api/facilities') // API 엔드포인트를 사용하여 데이터를 가져옴
-      .then((response) => {setFacilities(response.data); })// 응답 데이터를 images 상태로 설정
+    axios.get('http://localhost:3001/api/facilities')
+      .then((response) => {setFacilities(response.data); })
       .catch((error) => {console.error('Error fetching facility data:', error);});
   }, []);
 
@@ -45,7 +44,7 @@ function Reservation(){
     const handleSubmit = async(e) => {
       e.preventDefault();
 
-      //이 부분 DB에서 불러오는걸로 바꾸기 / 이미 예약한 정보가 있다면 제한을 걸기 위한 변수 선언
+      // making 2 variables to check whether there are already reserved facilities
       const response = await axios.get('http://localhost:3001/api/reservation');
       const strdReserv = response.data;
 
@@ -102,7 +101,6 @@ function Reservation(){
 
 
 
-
       // Checking if there is a reservation for same facility
       if (strdReserv.find(res => res.reservation_name === selectedFacility)) {
           alert('You already have a reservation for this facility.');
@@ -117,16 +115,13 @@ function Reservation(){
 
 
 
-
-
-
       const newReservation = { facility: selectedFacility, date, numPeople, suny, purpose, src, location};
 
 
-      // 여기가 찐으로 데이터 입력하는 부분
+      // data posting in the DB
       axios.post('http://localhost:3001/api/reservation', newReservation)
       .then((response) => {
-        alert(response.data.message); // 'Reservation successful!' 메시지 표시
+        alert(response.data.message); // 'Reservation successful!' message alert
       })
       .catch((error) => {
         alert('Failed to save reservation. Please try again.');
@@ -153,7 +148,7 @@ function Reservation(){
         <div>
           {slctedFacData && (
             <div className="imageList">
-                <img src={slctedFacData.image_src} alt={slctedFacData.facility_name}  />
+                <img src={slctedFacData.img_src} alt={slctedFacData.facility_name}  />
                 <div className="facility-details">
                     <h2>{slctedFacData.facility_name}</h2>
                     <p>{slctedFacData.facility_desc}</p>
@@ -200,13 +195,8 @@ function Reservation(){
     
     );
 
-
-
     
 }
-
-
-
 
 
 export default Reservation;

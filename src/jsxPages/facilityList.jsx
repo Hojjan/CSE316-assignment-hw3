@@ -4,14 +4,14 @@ import axios from 'axios';
 
 function FacilityList(){
 
-  const [images, setImages] = useState([]);
+  const [facility, setFacility] = useState([]);
 
   useEffect(() => {
-    // 백엔드 API 호출
-    axios.get('http://localhost:3001/api/facilities') // API 엔드포인트를 사용하여 데이터를 가져옴
+    // Backend API call
+    axios.get('http://localhost:3001/api/facilities') // get the data by using axios
       .then((response) => {
         console.log('API 데이터:', response.data);
-        setImages(response.data); // 응답 데이터를 images 상태로 설정
+        setFacility(response.data);
       })
       .catch((error) => {
         console.error('Error fetching facility data:', error);
@@ -21,21 +21,21 @@ function FacilityList(){
   return (
     <div className="imageContainer">
       {/* find the right source by using map function */}
-      {images.length > 0 ? images.map((image, index) => (
+      {facility.length > 0 ? facility.map((fac, index) => (
         <div key={index} className="image-box">
           {/* facility photo */}
-          <img src={image.img_src} alt={image.facility_name}/>
+          <img src={fac.img_src} alt={fac.facility_name}/>
 
           {/* Facility Information */}
-          <h2>{image.facility_name}</h2>
-          <p>{image.facility_desc}</p>
-          <p><img src={'/calendar.png'} alt={'calendar icon'} />{image.available_days}</p>
-          <p><img src={'/people.png'} alt={'people icon'} />{image.min_capacity}-{image.max_capacity}</p>
-          <p><img src={'/location.png'} alt={'location icon'} />{image.location}</p>
-          <p><img src={'/exclamation.png'} alt={'exclamation icon'} />{image.suny_flag ? 'Only available for SUNY' : 'Available to All'}</p>
+          <h2>{fac.facility_name}</h2>
+          <p>{fac.facility_desc}</p>
+          <p><img src={'/calendar.png'} alt={'calendar icon'} />{fac.available_days}</p>
+          <p><img src={'/people.png'} alt={'people icon'} />{fac.min_capacity}-{fac.max_capacity}</p>
+          <p><img src={'/location.png'} alt={'location icon'} />{fac.location}</p>
+          <p><img src={'/exclamation.png'} alt={'exclamation icon'} />{fac.suny_flag ? 'Only available for SUNY' : 'Available to All'}</p>
         </div>
       )) : (
-        <p>Loading facilities...</p> // 데이터 로드 중 표시할 메시지
+        <p>Data not loaded</p> // message to show when there is an error of data loading
       )}
     </div>
   );

@@ -6,18 +6,18 @@ function ReservationList() {
     const [reservations, setReservations] = useState([]);
 
     useEffect(() => {
-        // 서버에서 예약 목록을 가져오는 GET 요청
+        // Get the reservation history from DB server
         axios.get('http://localhost:3001/api/reservation')
-            .then((response) => {setReservations(response.data);}) // 서버로부터 받은 데이터로 상태 업데이트
+            .then((response) => {setReservations(response.data);})
             .catch((error) => {console.error('Error fetching reservation data:', error);});
     }, []);
     
 
     const handleRemoveReservation = (id) => {
-        // 예약 취소 API를 호출하여 DB에서 해당 예약을 삭제
+        // Deleting the data which has particular id from DB
         axios.delete(`http://localhost:3001/api/reservation/${id}`)
             .then(() => {
-                // 성공적으로 삭제 후, UI 업데이트
+                // After deleting from DB, UI update
                 setReservations(reservations.filter(reservation => reservation.id !== id));
             })
             .catch((error) => {
